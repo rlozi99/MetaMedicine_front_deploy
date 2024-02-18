@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: medicine-front
+  name: metahospital-front
   namespace: front
 spec:
   template:
     spec:
       containers:
-      - name: medicine-front-container
-        image: goodbirdacr.azurecr.io/medicine/front
+      - name: metahospital-front-container
+        image: goodbirdacr.azurecr.io/metahospital/front
         resources:
           limits:
             memory: "256Mi"

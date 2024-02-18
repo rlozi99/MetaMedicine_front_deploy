@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eunji-test-front
+  namespace: eunjitest
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: eunji-front
+  template:
+    metadata:
+      labels:
+        app: eunji-front
+    spec:
+      containers:
+      - name: eunjitest-front-container
+        image: goodbirdacr.azurecr.io/eunjitest_image/front:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+          requests:
+            memory: "256Mi"

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eunji-test-front
-  namespace: eunjitest
+  name: medicine-front
+  namespace: front
 spec:
   template:
     spec:
       containers:
-      - name: eunjitest-front-container
-        image: goodbirdacr.azurecr.io/eunjitest_image/front:dev
+      - name: medicine-front-container
+        image: goodbirdacr.azurecr.io/medicine/front:stg
         resources:
           limits:
             memory: "256Mi"

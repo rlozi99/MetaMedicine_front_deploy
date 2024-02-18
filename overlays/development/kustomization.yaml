@@ -11,7 +11,7 @@ configMapGenerator:
     - DEBUG=true
 
 images:
-  - name: goodbirdacr.azurecr.io/eunjitest_image/front
+  - name: goodbirdacr.azurecr.io/medicine/front
     newTag: dev
 
 patches:
@@ -20,5 +20,5 @@ patches:
       group: apps
       version: v1
       kind: Deployment
-      name: eunji-test-front
-      namespace: eunjitest
+      name: medicine-front
+      namespace: front

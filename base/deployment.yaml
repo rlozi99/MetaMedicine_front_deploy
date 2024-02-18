@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eunji-test-front
-  namespace: eunjitest
+  name: medicine-front
+  namespace: front
 spec:
   replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: eunji-front
+      app: medicine-front
   template:
     metadata:
       labels:
-        app: eunji-front
+        app: medicine-front
     spec:
       containers:
-      - name: eunjitest-front-container
-        image: goodbirdacr.azurecr.io/eunjitest_image/front:latest
+      - name: medicine-front-container
+        image: goodbirdacr.azurecr.io/medicine/front:latest
         ports:
         - containerPort: 80
         resources:

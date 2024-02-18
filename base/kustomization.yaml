@@ -5,7 +5,7 @@ namespace: eunjitest  # 여기에 네임스페이스 추가
 resources:
 - deployment.yaml
 - service.yaml
-
+#vf
 # images:
 # - name: goodbirdacr.azurecr.io/eunjitest_image/front
 #   newName: goodbirdacr.azurecr.io/eunjitest_image/front

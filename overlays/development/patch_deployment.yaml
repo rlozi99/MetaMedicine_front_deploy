@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: medicine-front-container
-        image: goodbirdacr.azurecr.io/medicine/front:dev
+        image: goodbirdacr.azurecr.io/medicine/front
         resources:
           limits:
             memory: "256Mi"

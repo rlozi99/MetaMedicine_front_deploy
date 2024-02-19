@@ -11,7 +11,8 @@ configMapGenerator:
     - DEBUG=true
 
 images:
-  - name: goodbirdacr.azurecr.io/metahospital/front
+  - name: goodbirdacr.azurecr.io/medical/front
+    newName: goodbirdacr.azurecr.io/medical/front
     newTag: dev
 
 patches:
@@ -20,5 +21,5 @@ patches:
       group: apps
       version: v1
       kind: Deployment
-      name: metahospital-front
+      name: front-end-deployment
       namespace: front

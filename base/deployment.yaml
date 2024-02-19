@@ -1,26 +1,69 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: metahospital-front
+  name: front-end-deployment
   namespace: front
 spec:
-  replicas: 1
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: metahospital-front
+      app: front-end
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9113"
+        prometheus.io/scheme: http
       labels:
-        app: metahospital-front
+        app: front-end
     spec:
       containers:
-      - name: metahospital-front-container
-        image: goodbirdacr.azurecr.io/metahospital/front:latest
-        ports:
-        - containerPort: 80
+      - name: front-end-deployment
+        image: goodbirdacr.azurecr.io/medical/front:latest
         resources:
-          limits:
-            memory: "512Mi"
           requests:
-            memory: "256Mi"
+            cpu: 10m
+            memory: 30Mi     
+          limits:
+            cpu: 10m
+            memory: 50Mi
+        ports: 
+        - containerPort: 80
+      - name: metrics
+        args:
+        - --nginx.scrape-uri
+        - http://127.0.0.1:80/metrics
+        image: nginx/nginx-prometheus-exporter
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi     
+          limits:
+            cpu: 10m
+            memory: 50Mi
+        ports: 
+        - containerPort: 9113
+      imagePullSecrets:
+      - name: goodbirdacr
+
+---
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend-hpa
+  namespace: front
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: front-end-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 10
